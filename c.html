@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Can I Ask You Out?</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background-color: #000;
+      font-family: 'Arial', sans-serif;
+      overflow: hidden;
+    }
+
+    .center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      color: white;
+      z-index: 2;
+    }
+
+    #lightBtn {
+      padding: 15px 25px;
+      font-size: 20px;
+      border: none;
+      background-color: yellow;
+      color: black;
+      cursor: pointer;
+      border-radius: 10px;
+      box-shadow: 0 0 15px #fff;
+    }
+
+    #note, #responseButtons, #finalMessage {
+      display: none;
+      animation: fadeIn 1.5s ease forwards;
+      margin-top: 20px;
+    }
+
+    #note {
+      font-size: 28px;
+      color: #fff;
+      margin-bottom: 20px;
+    }
+
+    .responseBtn {
+      padding: 10px 20px;
+      font-size: 18px;
+      margin: 10px;
+      border: none;
+      background-color: #ff69b4;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .responseBtn:hover {
+      transform: scale(1.1);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* Heart animation */
+    .heart {
+      position: absolute;
+      font-size: 24px;
+      animation: floatUp 5s infinite;
+      opacity: 0.7;
+    }
+
+    @keyframes floatUp {
+      0% {
+        bottom: 0;
+        opacity: 1;
+        transform: translateX(0);
+      }
+      100% {
+        bottom: 100%;
+        opacity: 0;
+        transform: translateX(-50px);
+      }
+    }
+
+    #finalMessage {
+      font-size: 22px;
+      line-height: 1.6;
+      max-width: 600px;
+      margin: auto;
+    }
+  </style>
+</head>
+<body>
+
+<div class="center" id="startScreen">
+  <button id="lightBtn">💡 Light On</button>
+</div>
+
+<div class="center" id="questionArea">
+  <div id="note">Can I ask you out, sir? 💌</div>
+  <div id="responseButtons">
+    <button class="responseBtn">Yes !</button>
+    <button class="responseBtn">Yes !!</button>
+  </div>
+</div>
+
+<div class="center" id="finalMessage">
+  <p>“I thought I had good taste in books—then I met you, and realized I have excellent taste in people too. <br><br>
+  But I wish forward to see you in the cafe... <br>
+  And I just feel I have read the prologue and now I want to read the whole book.”</p>
+</div>
+
+<!-- Heart container -->
+<script>
+  const lightBtn = document.getElementById('lightBtn');
+  const startScreen = document.getElementById('startScreen');
+  const questionArea = document.getElementById('questionArea');
+  const note = document.getElementById('note');
+  const responseButtons = document.getElementById('responseButtons');
+  const finalMessage = document.getElementById('finalMessage');
+  const buttons = document.querySelectorAll('.responseBtn');
+
+  lightBtn.addEventListener('click', () => {
+    startScreen.style.display = 'none';
+    questionArea.style.display = 'block';
+    setTimeout(() => {
+      note.style.display = 'block';
+      responseButtons.style.display = 'block';
+    }, 500);
+    startHeartRain();
+  });
+
+  buttons.forEach(button => {
+    button.addEventListener('click', () => {
+      note.style.display = 'none';
+      responseButtons.style.display = 'none';
+      finalMessage.style.display = 'block';
+    });
+  });
+
+  function startHeartRain() {
+    setInterval(() => {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.innerText = '💗';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.fontSize = Math.random() * 20 + 20 + 'px';
+      document.body.appendChild(heart);
+      setTimeout(() => {
+        heart.remove();
+      }, 5000);
+    }, 300);
+  }
+</script>
+
+</body>
+</html>
+
